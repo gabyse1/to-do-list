@@ -1,15 +1,13 @@
-# Webpack setting template
+# To do list
 
-Webpack template to use as a starting point in web projects.
+"To-do list" is a tool that helps to organize your day. It simply lists the things that you need to do and allows you to mark them as complete.
+
+![screenshot](./screenshot.png)
 
 ## Features
 
-The template is made up of:
-- A *index.html* file has only the basic markup.
-- A *style.css* file with only background color.
-- A *index.js* file that imports *lodash* module and *style.css*, and displays a message.
-- A *package.json* file that list all needed devDependencies.
-- A *webpack.config.js* file with basic settings that will be used to generate the web project's production files inside of *dist* folder.
+- It is based in a minimalistic design.
+- It render the task list dinamically using javascript.
 
 
 ## Built With
@@ -59,7 +57,7 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Guide: [Webpack](https://webpack.js.org/guides/getting-started/#basic-setup)
+- Model: [web.archive.org.](https://web.archive.org/web/20180320194056/http://www.getminimalist.com:80/)
 
 ## 📝 License
 
