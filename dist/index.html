@@ -11,22 +11,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Andika+New+Basic:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet" />
   <title>Gaby's To-do list</title>
-</head>
+<script defer src="index.bundle.js"></script></head>
 
 <body>
   <div class="body__container">
-    <div class="task__header">
-      <h1 class="body__item">Today's To Do</h1>
-      <button type="button" id="btn__resync-old-tasks">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 92.89">
-          <path
-            d="M25.67,73.46c1.6-1.17,2.88-2.15,4.22-3.07a12.87,12.87,0,0,1,2.73-.53L36,94.58c-8.34-1.07-15.51-1.82-22.57-3.19-.56-.11-.31-4.41-.43-6.81-3.57-8.32-8.73-16.82-10.86-26C-3,36.51,9.8,13.69,30.75,4.9c3.4-1.42,7.29-2.73,8.78,1.69,1.29,3.81,2.34,8.56-2.45,11.48-1.73,1.06-3.65,1.82-5.35,2.92C13.31,32.86,10.24,58.25,25.67,73.46ZM82.86,59.72C79.8,69.83,73.3,77,63.76,81.52c-5.52,2.59-4.66,7.45-3.31,11.56,1.64,5,5.73,3.42,9.16,1.76C87.84,86,98,71.64,98.95,51.23c.66-13.76-4.75-25.32-12.87-35.52.75-2.5,1.15-7,.7-7.08-7.22-1.36-14.54-2.17-22.5-3.19.73,6.77,1.22,12,1.86,17.25,1,8.34,1.62,8.6,8.63,3.93C83.61,36.39,86.43,47.91,82.86,59.72Z"
-            transform="translate(-1 -3.56)" />
-        </svg>
-      </button>
-    </div>
+    <h1 class="body__item">Today's To Do</h1>
     <form action="#" id="task__form" class="body__item">
-      <input type="text" id="task__input" placeholder="Add to your list...">
+      <input type="text" id="task__input">
       <button type="submit" id="task__submit">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 56.24">
           <path
@@ -35,7 +26,7 @@
         </svg>
       </button>
     </form>
-    <ul id="task__list" class="task__list">
+    <ul class="task__list">
     </ul>
     <button type="button" id="btn__clear-done-tasks" class="body__item">Clear done tasks</button>
   </div>
