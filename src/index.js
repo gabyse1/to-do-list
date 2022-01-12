@@ -2,9 +2,9 @@ import './style.css';
 
 const taskList = document.querySelector('#task__list');
 const toDoListArray = [{ id: 1, description: 'Double-tap to edit', completed: false },
-{ id: 2, description: 'Drag and drop to reorder your list', completed: false },
-{ id: 3, description: 'Manage all your lists in one place', completed: false },
-{ id: 4, description: 'Resync to clear out the old', completed: false }];
+  { id: 2, description: 'Drag and drop to reorder your list', completed: false },
+  { id: 3, description: 'Manage all your lists in one place', completed: false },
+  { id: 4, description: 'Resync to clear out the old', completed: false }];
 
 const sortArray = () => {
   toDoListArray.sort((a, b) => {
