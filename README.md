@@ -8,11 +8,19 @@
 
 - It is based in a minimalistic design.
 - It render the task list dinamically using javascript.
+- Create a new task by entering the description in the field *Add to your list* and pressing the *enter key* or the *enter button*.
+- Delete one or more tasks by selecting their checkboxes and pressing the button *Clear done tasks*.
+- Edit any task already listed by clicking on its description.
 
 
 ## Built With
 
 - HTML / CSS / Javascript
+
+
+## Live Demo
+
+[To Do List](https://gabyse1.github.io/to-do-list/dist/)
 
 
 ## Getting Started
@@ -33,7 +41,7 @@ To get a local copy up and running follow these simple example steps.
 ### Deployment
 
 - Run the command line *npm run start*.
-- The basic template will automatically open the *index.html* file in a browser.
+- The project will automatically open the *index.html* file in a browser.
 
 
 ## Authors
