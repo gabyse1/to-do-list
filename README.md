@@ -20,7 +20,7 @@
 
 ## Live Demo
 
-[To Do List](https://gabyse1.github.io/to-do-list/)
+[To Do List](https://gabyse1.github.io/to-do-list/dist/)
 
 
 ## Getting Started
