@@ -1,21 +1,26 @@
 import './style.css';
+import * as CRUD from './crud.js';
 
 const taskList = document.querySelector('#task__list');
-const toDoListArray = [{ id: 1, description: 'Double-tap to edit', completed: false },
-  { id: 2, description: 'Drag and drop to reorder your list', completed: false },
-  { id: 3, description: 'Manage all your lists in one place', completed: false },
-  { id: 4, description: 'Resync to clear out the old', completed: false }];
+let toDoListArray = [];
 
-const sortArray = () => {
-  toDoListArray.sort((a, b) => {
-    if (a.id > b.id) return 1;
-    if (a.id < b.id) return -1;
-    return 0;
-  });
+const editTaskDescription = (taskElement) => {
+  CRUD.editTask(toDoListArray, parseInt(taskElement.parentElement.parentElement.dataset.taskid, 10),
+    taskElement.value);
+};
+
+const adjustTxtHeight = () => {
+  const textElements = document.querySelectorAll('.txt__task-description');
+  if (textElements) {
+    textElements.forEach((elem) => {
+      elem.style.height = `${elem.scrollHeight}px`;
+    });
+  }
 };
 
 const renderTaskList = () => {
-  sortArray();
+  toDoListArray = CRUD.loadLocalStorage(toDoListArray);
+  taskList.innerHTML = '';
   toDoListArray.forEach((task) => {
     const taskListItem = document.createElement('li');
     taskListItem.classList.add('task__list-item');
@@ -29,7 +34,7 @@ const renderTaskList = () => {
                 d="M1,50.09c2.79-2.46,5.21-5.14,8.14-7,4.21-2.72,8.46-1.73,12.25,1.29C26,48,28.86,53,31.39,58.25c.74,1.52,1.42,3.06,2.08,4.5,6-8.13,11.79-16.27,17.92-24.13C58.09,30,65.5,22,74.28,15.44c5.44-4.08,11.19-7.64,18.16-8.32a39.55,39.55,0,0,1,6.33.37l.22.77c-.85.71-1.68,1.43-2.54,2.13C81.14,22.82,67.17,36.54,56.86,53.53c-3.77,6.21-6.66,12.94-10.12,19.34-2.6,4.81-5.26,9.61-8.29,14.15a13.11,13.11,0,0,1-8.74,5.88c-3.35.58-5-.44-6-3.69-2.82-9.22-6-18.3-10.88-26.67C9.36,56.53,7,54.06,1,50.09Z" />
             </svg>`;
     checkBtn.addEventListener('click', () => {
-      checkBtn.classList.toggle('hide-checklist-btn');
+      checkBtn.classList.toggle('checklist-active');
     });
     lisItemCheck.appendChild(checkBtn);
     taskListItem.appendChild(lisItemCheck);
@@ -42,6 +47,7 @@ const renderTaskList = () => {
     taskDescription.textContent = `${task.description}`;
     taskDescription.addEventListener('input', () => {
       taskDescription.style.height = `${taskDescription.scrollHeight}px`;
+      editTaskDescription(taskDescription);
     });
     listItemView.appendChild(taskDescription);
     taskListItem.appendChild(listItemView);
@@ -59,14 +65,28 @@ const renderTaskList = () => {
     taskListItem.appendChild(listItemDots);
     taskList.appendChild(taskListItem);
   });
+  adjustTxtHeight();
 };
 
-renderTaskList();
-
+// CRUD TASKS
 const taskForm = document.querySelector('#task__form');
+const taskInput = document.querySelector('#task__input');
 const submitButton = document.querySelector('#task__submit');
+const removeButton = document.querySelector('#btn__clear-done-tasks');
 
 const submitTask = () => {
+  CRUD.addTask(toDoListArray, taskInput.value);
+  taskInput.value = '';
+  renderTaskList();
+};
+
+const removeTasks = (checklist) => {
+  const taskIds = [];
+  checklist.forEach((task) => {
+    taskIds.push(parseInt(task.parentElement.parentElement.dataset.taskid, 10));
+  });
+  CRUD.dropTask(toDoListArray, taskIds);
+  renderTaskList();
 };
 
 taskForm.addEventListener('enter', (e) => {
@@ -77,4 +97,17 @@ taskForm.addEventListener('enter', (e) => {
 submitButton.addEventListener('click', (e) => {
   e.preventDefault();
   submitTask();
+});
+
+removeButton.addEventListener('click', () => {
+  removeTasks(document.querySelectorAll('.checklist-active'));
+});
+
+// START LOADING
+window.addEventListener('load', () => {
+  renderTaskList();
+});
+
+window.addEventListener('resize', () => {
+  renderTaskList();
 });
