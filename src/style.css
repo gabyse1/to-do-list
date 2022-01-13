@@ -54,10 +54,11 @@ input[type=text] {
 }
 
 textarea {
-  height: 1.2rem;
+  height: 1.25rem;
   padding: 0;
   overflow: hidden;
   resize: none;
+  cursor: default;
 }
 
 input[type=text]:focus,
@@ -95,13 +96,14 @@ button svg {
 .btn__task-checklist svg {
   display: none;
   height: 100%;
+  fill: rgb(5, 161, 88);
 }
 
-.hide-checklist-btn {
+.checklist-active {
   border: none;
 }
 
-.hide-checklist-btn svg {
+.checklist-active svg {
   display: block;
 }
 
