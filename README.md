@@ -9,7 +9,8 @@
 - It is based in a minimalistic design.
 - It render the task list dinamically using javascript.
 - Create a new task by entering the description in the field *Add to your list* and pressing the *enter key* or the *enter button*.
-- Delete one or more tasks by selecting their checkboxes and pressing the button *Clear done tasks*.
+- Delere a task by clicking on its description and then on its trash icon.
+- Delete several tasks by selecting their checkboxes and pressing the button *Clear done tasks*.
 - Edit any task already listed by clicking on its description.
 
 
