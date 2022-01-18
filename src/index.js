@@ -1,14 +1,19 @@
 import './style.css';
+import * as LS from './localStorage.js';
 import * as CRUD from './crud.js';
-import setStatus from './status.js';
 
+const taskForm = document.querySelector('#task__form');
+const taskInput = document.querySelector('#task__input');
+const removeButton = document.querySelector('#btn__clear-done-tasks');
 const taskList = document.querySelector('#task__list');
-let toDoListArray = [];
 
-const editTaskDescription = (taskElement) => {
-  CRUD.editTask(toDoListArray, parseInt(taskElement.parentElement.parentElement.dataset.taskid, 10),
-    taskElement.value);
-};
+const manageToDoListArray = (() => {
+  let toDoListArray = [];
+  return () => {
+    toDoListArray = LS.loadLocalStorage();
+    return toDoListArray;
+  };
+})();
 
 const adjustTxtHeight = () => {
   const textElements = document.querySelectorAll('.txt__task-description');
@@ -26,20 +31,16 @@ const toggleTaskTools = (taskElement) => {
   dragBtn.classList.toggle('d-none');
 };
 
-const removeATask = (idTask) => {
-  CRUD.dropTask(toDoListArray, [idTask]);
-};
-
 const updateTaskStatus = (checkElement) => {
-  const taskId = parseInt(checkElement.dataset.taskid, 10);
-  if (checkElement.classList.contains('checklist-active')) setStatus(toDoListArray, taskId, true);
-  else setStatus(toDoListArray, taskId, false);
+  const taskId = checkElement.dataset.taskid;
+  if (checkElement.classList.contains('checklist-active')) CRUD.updateStatusTask(manageToDoListArray(), taskId, true);
+  else CRUD.updateStatusTask(manageToDoListArray(), taskId, false);
 };
 
 const renderTaskList = () => {
-  toDoListArray = CRUD.loadLocalStorage(toDoListArray);
+  const loadedToDoList = manageToDoListArray();
   taskList.innerHTML = '';
-  toDoListArray.forEach((task) => {
+  loadedToDoList.forEach((task) => {
     const taskListItem = document.createElement('li');
     taskListItem.classList.add('task__list-item');
     taskListItem.setAttribute('data-taskid', task.id);
@@ -71,7 +72,7 @@ const renderTaskList = () => {
     taskDescription.textContent = `${task.description}`;
     taskDescription.addEventListener('input', () => {
       taskDescription.style.height = `${taskDescription.scrollHeight}px`;
-      editTaskDescription(taskDescription);
+      CRUD.editTask(manageToDoListArray(), +taskDescription.dataset.taskid, taskDescription.value);
     });
     taskDescription.addEventListener('focus', () => {
       toggleTaskTools(taskDescription);
@@ -92,7 +93,7 @@ const renderTaskList = () => {
               <path d="M80.21,6.61c-.76.62-2,2.4-3.49,2.76C58.13,13.73,39.49,17.9,20.85,22.08c-2.7.61-4.49-.59-5.07-3.26s.69-4.39,3.34-5c2.92-.7,5.84-1.42,8.78-2,2.43-.51,4.9-.67,5.62-3.88.18-.82,1.74-1.65,2.8-1.91,6.3-1.55,12.6-3.1,19-4.26,1.6-.29,3.45.88,5.2,1.29a9.26,9.26,0,0,0,3.55.53c3.66-.67,7.25-1.71,10.9-2.43C77.94.51,80.31,2.55,80.21,6.61Z" transform="translate(-15.65 -1)"/>
             </svg>`;
     trashBtn.addEventListener('click', () => {
-      removeATask(parseInt(trashBtn.dataset.taskid, 10));
+      CRUD.dropTask(manageToDoListArray(), [+trashBtn.dataset.taskid]);
       renderTaskList();
     });
     listItemTools.appendChild(trashBtn);
@@ -113,12 +114,8 @@ const renderTaskList = () => {
 };
 
 // CRUD TASKS
-const taskForm = document.querySelector('#task__form');
-const taskInput = document.querySelector('#task__input');
-const removeButton = document.querySelector('#btn__clear-done-tasks');
-
 const submitTask = () => {
-  CRUD.addTask(toDoListArray, taskInput.value);
+  CRUD.addTask(manageToDoListArray(), taskInput.value);
   taskInput.value = '';
   renderTaskList();
 };
@@ -126,15 +123,15 @@ const submitTask = () => {
 const removeTasks = (checklist) => {
   const taskIds = [];
   checklist.forEach((task) => {
-    taskIds.push(parseInt(task.parentElement.parentElement.dataset.taskid, 10));
+    taskIds.push(+task.dataset.taskid);
   });
-  CRUD.dropTask(toDoListArray, taskIds);
+  CRUD.dropTask(manageToDoListArray(), taskIds);
   renderTaskList();
 };
 
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  submitTask();
+  if (taskInput.value !== '') submitTask();
 });
 
 removeButton.addEventListener('click', () => {
@@ -143,9 +140,5 @@ removeButton.addEventListener('click', () => {
 
 // START LOADING
 window.addEventListener('load', () => {
-  renderTaskList();
-});
-
-window.addEventListener('resize', () => {
   renderTaskList();
 });
