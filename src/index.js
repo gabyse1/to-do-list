@@ -131,7 +131,7 @@ const removeTasks = (checklist) => {
 
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  submitTask();
+  if (taskInput.value !== '') submitTask();
 });
 
 removeButton.addEventListener('click', () => {
@@ -140,9 +140,5 @@ removeButton.addEventListener('click', () => {
 
 // START LOADING
 window.addEventListener('load', () => {
-  renderTaskList();
-});
-
-window.addEventListener('resize', () => {
   renderTaskList();
 });

@@ -24,8 +24,7 @@ body {
   align-items: center;
   width: 90%;
   max-width: 37.5rem;
-  height: 80%;
-  margin: auto;
+  margin: 4rem auto;
   background: white;
 }
 
@@ -43,7 +42,6 @@ button {
   width: 100%;
   font-family: "Andika New Basic", sans-serif;
   font-size: 1rem;
-  line-height: 1.1rem;
   color: #272a31;
   background: transparent;
   border: none;
@@ -168,6 +166,11 @@ ul {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+#btn__resync-old-tasks {
+  height: auto;
+  bottom: 0;
 }
 
 #task__submit svg {
