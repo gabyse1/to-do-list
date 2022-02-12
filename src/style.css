@@ -173,6 +173,18 @@ ul {
   bottom: 0;
 }
 
+.btn__resync-old-task-msg {
+  display: flex;
+  font-size: 0.5rem;
+  position: absolute;
+  top: 1.2rem;
+  right: 2.5rem;
+}
+
+.hide__element {
+  display: none;
+}
+
 #task__submit svg {
   width: 50%;
 }
@@ -224,6 +236,9 @@ ul {
 .task__header {
   background-color: #134da2;
   color: #fff;
+  display: flex;
+  justify-content: row;
+  align-items: center;
   position: relative;
 }
 
@@ -233,4 +248,8 @@ ul {
 
 .txt-active {
   background-color: rgb(235, 235, 106);
+}
+
+.dragging {
+  opacity: 0.7;
 }
