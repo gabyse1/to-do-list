@@ -131,16 +131,6 @@ const removeTasks = (checklist) => {
   renderTaskList();
 };
 
-const sortTasks = () => {
-  const taskIds = [];
-  const elDom = taskList.querySelectorAll('.task__list-item');
-  elDom.forEach((ele) => {
-    taskIds.push(ele.getAttribute('data-taskid'));
-  });
-  CRUD.updateOrderTask(manageToDoListArray(), taskIds);
-  renderTaskList();
-};
-
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
   if (taskInput.value !== '') submitTask();

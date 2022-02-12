@@ -237,7 +237,7 @@ ul {
   background-color: #134da2;
   color: #fff;
   display: flex;
-  justify-content: row;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
 }
