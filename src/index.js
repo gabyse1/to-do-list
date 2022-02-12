@@ -6,6 +6,7 @@ const taskForm = document.querySelector('#task__form');
 const taskInput = document.querySelector('#task__input');
 const removeButton = document.querySelector('#btn__clear-done-tasks');
 const taskList = document.querySelector('#task__list');
+const resyncButton = document.querySelector('#btn__resync-old-tasks');
 
 const manageToDoListArray = (() => {
   let toDoListArray = [];
@@ -44,6 +45,7 @@ const renderTaskList = () => {
     const taskListItem = document.createElement('li');
     taskListItem.classList.add('task__list-item');
     taskListItem.setAttribute('data-taskid', task.id);
+    taskListItem.draggable = true;
     const lisItemCheck = document.createElement('div');
     lisItemCheck.classList.add('list-item-check');
     const checkBtn = document.createElement('button');
@@ -129,6 +131,16 @@ const removeTasks = (checklist) => {
   renderTaskList();
 };
 
+const sortTasks = () => {
+  const taskIds = [];
+  const elDom = taskList.querySelectorAll('.task__list-item');
+  elDom.forEach((ele) => {
+    taskIds.push(ele.getAttribute('data-taskid'));
+  });
+  CRUD.updateOrderTask(manageToDoListArray(), taskIds);
+  renderTaskList();
+};
+
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
   if (taskInput.value !== '') submitTask();
@@ -136,6 +148,21 @@ taskForm.addEventListener('submit', (e) => {
 
 removeButton.addEventListener('click', () => {
   removeTasks(document.querySelectorAll('.checklist-active'));
+});
+
+resyncButton.addEventListener('click', () => {
+  CRUD.resyncTask(manageToDoListArray());
+  renderTaskList();
+});
+
+resyncButton.addEventListener('mouseover', () => {
+  const resyncMsg = document.querySelector('.btn__resync-old-task-msg');
+  resyncMsg.classList.remove('hide__element');
+});
+
+resyncButton.addEventListener('mouseout', () => {
+  const resyncMsg = document.querySelector('.btn__resync-old-task-msg');
+  resyncMsg.classList.add('hide__element');
 });
 
 // START LOADING
