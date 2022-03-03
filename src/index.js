@@ -38,6 +38,49 @@ const updateTaskStatus = (checkElement) => {
   else CRUD.updateStatusTask(manageToDoListArray(), taskId, false);
 };
 
+const sortTasks = () => {
+  const taskIds = [];
+  const elDom = taskList.querySelectorAll('.task__list-item');
+  elDom.forEach((ele, index) => {
+    taskIds.push(ele.getAttribute('data-taskid'));
+    ele.setAttribute('data-taskid', index + 1);
+  });
+  CRUD.updateOrderTask(manageToDoListArray(), taskIds);
+};
+
+// DRAG FUNCTIONALITY
+const getCurrentAfterElement = (y) => {
+  const draggableElements = [...taskList.querySelectorAll('.task__list-item:not(.dragging)')];
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height;
+    if (offset < 0 && offset > closest.offset) return { offset, element: child };
+    return closest;
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+};
+
+const dragTasks = () => {
+  const draggables = document.querySelectorAll('.task__list-item');
+  draggables.forEach((draggable) => {
+    draggable.addEventListener('dragstart', () => {
+      draggable.classList.add('dragging');
+    });
+
+    draggable.addEventListener('dragend', () => {
+      draggable.classList.remove('dragging');
+      sortTasks();
+    });
+  });
+
+  taskList.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    const draggable = document.querySelector('.dragging');
+    const afterElement = getCurrentAfterElement(e.clientY);
+    if (afterElement === null) taskList.appendChild(draggable);
+    else taskList.insertBefore(draggable, afterElement);
+  });
+};
+
 const renderTaskList = () => {
   const loadedToDoList = manageToDoListArray();
   taskList.innerHTML = '';
@@ -113,6 +156,7 @@ const renderTaskList = () => {
     taskList.appendChild(taskListItem);
   });
   adjustTxtHeight();
+  dragTasks();
 };
 
 // CRUD TASKS
