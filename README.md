@@ -1,6 +1,6 @@
 # To do list
 
-"To-do list" is a tool that helps to organize your day. It simply lists the things that you need to do and allows you to mark them as complete.
+"To-do list" is a tool that helps organize your day. It lists the tasks you need to do and allows you to mark them as completed. The user can update task descriptions, delete one or a selected group, and also reorder them using the drag function.
 
 ![screenshot](./screenshot.png)
 
@@ -16,12 +16,14 @@
 
 ## Built With
 
-- HTML / CSS / Javascript
+- Javascript
+- HTML
+- CSS
 
 
 ## Live Demo
 
-[To Do List](https://gabyse1.github.io/to-do-list/dist/)
+[To Do List](https://gabyse1.github.io/to-do-list/)
 
 
 ## Getting Started
@@ -31,11 +33,10 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-- Have a computer
+- Have git installed on your local computer.
 
 ### Install
 
-- Install git on your local computer.
 - Clone this repository to your local computer. Choose the location you prefer.
 - Run the command *npm install* to install all project's dependencies.
 

@@ -4,19 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="https://gabyse1.github.io/to-do-list/2a588965593990367310.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- google fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Andika+New+Basic:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-    rel="stylesheet" />
-  <title>Gaby's To-do list</title>
+  <meta property="og:title" content="Todo list" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gabyse1.github.io/to-do-list/b8ec81f678ef4f218175.png">
+  <meta property="og:url" content="https://gabyse1.github.io/to-do-list/" />
+  <meta property="og:description" content="It is a tool that helps organize your day. It lists the tasks you need to do and allows you to mark them as completed. The user can update task descriptions, delete one or a selected group, and also reorder them using the drag function." />
+  <meta property="og:author" content="Gabriela Sánchez Espirilla" />
+  <title>Gaby's Todo list</title>
 </head>
 
 <body>
   <div class="body__container">
     <div class="task__header">
-      <h1 class="body__item">Today's To Do</h1>
+      <h1>Today's To Do</h1>
+      <span class="btn__resync-old-task-msg hide__element">Drop tasks > 24 hours ago</span>
       <button type="button" id="btn__resync-old-tasks">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98.06 98">
           <path
@@ -25,7 +28,7 @@
         </svg>
       </button>
     </div>
-    <form action="#" id="task__form" class="body__item">
+    <form action="#" id="task__form" class="task__form">
       <input type="text" id="task__input" placeholder="Add to your list...">
       <button type="submit" id="task__submit">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 56.24">
@@ -37,7 +40,7 @@
     </form>
     <ul id="task__list" class="task__list">
     </ul>
-    <button type="button" id="btn__clear-done-tasks" class="body__item">Clear done tasks</button>
+    <button type="button" id="btn__clear-done-tasks">Clear done tasks</button>
   </div>
 </body>
 

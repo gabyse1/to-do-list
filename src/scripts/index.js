@@ -1,4 +1,6 @@
-import './style.css';
+import '../css/style.css';
+import '../images/favicon.ico';
+import '../images/tdl-screenshot-1200x627.png';
 import * as LS from './localStorage.js';
 import * as CRUD from './crud.js';
 
@@ -6,6 +8,7 @@ const taskForm = document.querySelector('#task__form');
 const taskInput = document.querySelector('#task__input');
 const removeButton = document.querySelector('#btn__clear-done-tasks');
 const taskList = document.querySelector('#task__list');
+const resyncButton = document.querySelector('#btn__resync-old-tasks');
 
 const manageToDoListArray = (() => {
   let toDoListArray = [];
@@ -37,6 +40,49 @@ const updateTaskStatus = (checkElement) => {
   else CRUD.updateStatusTask(manageToDoListArray(), taskId, false);
 };
 
+const sortTasks = () => {
+  const taskIds = [];
+  const elDom = taskList.querySelectorAll('.task__list-item');
+  elDom.forEach((ele, index) => {
+    taskIds.push(ele.getAttribute('data-taskid'));
+    ele.setAttribute('data-taskid', index + 1);
+  });
+  CRUD.updateOrderTask(manageToDoListArray(), taskIds);
+};
+
+// DRAG FUNCTIONALITY
+const getCurrentAfterElement = (y) => {
+  const draggableElements = [...taskList.querySelectorAll('.task__list-item:not(.dragging)')];
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height;
+    if (offset < 0 && offset > closest.offset) return { offset, element: child };
+    return closest;
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+};
+
+const dragTasks = () => {
+  const draggables = document.querySelectorAll('.task__list-item');
+  draggables.forEach((draggable) => {
+    draggable.addEventListener('dragstart', () => {
+      draggable.classList.add('dragging');
+    });
+
+    draggable.addEventListener('dragend', () => {
+      draggable.classList.remove('dragging');
+      sortTasks();
+    });
+  });
+
+  taskList.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    const draggable = document.querySelector('.dragging');
+    const afterElement = getCurrentAfterElement(e.clientY);
+    if (afterElement === null) taskList.appendChild(draggable);
+    else taskList.insertBefore(draggable, afterElement);
+  });
+};
+
 const renderTaskList = () => {
   const loadedToDoList = manageToDoListArray();
   taskList.innerHTML = '';
@@ -44,6 +90,7 @@ const renderTaskList = () => {
     const taskListItem = document.createElement('li');
     taskListItem.classList.add('task__list-item');
     taskListItem.setAttribute('data-taskid', task.id);
+    taskListItem.draggable = true;
     const lisItemCheck = document.createElement('div');
     lisItemCheck.classList.add('list-item-check');
     const checkBtn = document.createElement('button');
@@ -111,6 +158,7 @@ const renderTaskList = () => {
     taskList.appendChild(taskListItem);
   });
   adjustTxtHeight();
+  dragTasks();
 };
 
 // CRUD TASKS
@@ -136,6 +184,21 @@ taskForm.addEventListener('submit', (e) => {
 
 removeButton.addEventListener('click', () => {
   removeTasks(document.querySelectorAll('.checklist-active'));
+});
+
+resyncButton.addEventListener('click', () => {
+  CRUD.resyncTask(manageToDoListArray());
+  renderTaskList();
+});
+
+resyncButton.addEventListener('mouseover', () => {
+  const resyncMsg = document.querySelector('.btn__resync-old-task-msg');
+  resyncMsg.classList.remove('hide__element');
+});
+
+resyncButton.addEventListener('mouseout', () => {
+  const resyncMsg = document.querySelector('.btn__resync-old-task-msg');
+  resyncMsg.classList.add('hide__element');
 });
 
 // START LOADING

@@ -4,28 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="https://gabyse1.github.io/to-do-list/2a588965593990367310.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- google fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Andika+New+Basic:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-    rel="stylesheet" />
-  <title>Gaby's To-do list</title>
+  <meta property="og:title" content="Todo list" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gabyse1.github.io/to-do-list/b8ec81f678ef4f218175.png">
+  <meta property="og:url" content="https://gabyse1.github.io/to-do-list/" />
+  <meta property="og:description" content="It is a tool that helps organize your day. It lists the tasks you need to do and allows you to mark them as completed. The user can update task descriptions, delete one or a selected group, and also reorder them using the drag function." />
+  <meta property="og:author" content="Gabriela Sánchez Espirilla" />
+  <title>Gaby's Todo list</title>
 <script defer src="index.bundle.js"></script></head>
 
 <body>
   <div class="body__container">
     <div class="task__header">
-      <h1 class="body__item">Today's To Do</h1>
+      <h1>Today's To Do</h1>
+      <span class="btn__resync-old-task-msg hide__element">Drop tasks > 24 hours ago</span>
       <button type="button" id="btn__resync-old-tasks">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 85.71">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98.06 98">
           <path
-            d="M99.5,54.56A99.89,99.89,0,0,1,97,64.6,42.53,42.53,0,0,1,55.08,93.3C44.56,93,35.42,89,27.43,81.76L37.3,68.67C43,74.27,49.56,77.18,57.38,77a25.87,25.87,0,0,0,15.95-5.92A26.54,26.54,0,0,0,51.76,24.38c-11.47,2-20.49,12-21.47,24H42.38L22,75.42c-.61-.75-1.08-1.3-1.52-1.88Q11.65,61.9,2.86,50.27A16.4,16.4,0,0,0,1.5,48.85v-.41H13.77c.13-1,.25-1.91.34-2.79,2-20.53,20.14-37.45,40.8-38A42.73,42.73,0,0,1,97,36.36a100,100,0,0,1,2.49,10Z"
-            transform="translate(-1.5 -7.61)" />
+            d="M27.49,26.25c1.54,1.49,3,2.92,4.49,4.36s3,3,4.47,4.5a3.5,3.5,0,0,1,.95,3.76,3.87,3.87,0,0,1-3,2.93,6.33,6.33,0,0,1-1.17.07c-9.34,0-18.69,0-28,0A4.35,4.35,0,0,1,.82,37.53c.06-9.38,0-18.76,0-28.14A4.09,4.09,0,0,1,5.26,5.15,3.63,3.63,0,0,1,7.71,6.37l7.81,7.76a4.84,4.84,0,0,1,.44.59c.8-.71,1.47-1.31,2.15-1.89A49.36,49.36,0,0,1,40.89,1.95a45.85,45.85,0,0,1,13.35-.62A49.1,49.1,0,0,1,98,41.15a44,44,0,0,1,.52,14.36C96.29,71.88,88.2,84.43,73.82,92.74A47,47,0,0,1,57,98.57,49.24,49.24,0,0,1,16.83,86.34c-1.6-1.45-3-3.1-4.5-4.7a2.1,2.1,0,0,1,.13-3.1C15.21,75.75,18,73,20.71,70.19a2.26,2.26,0,0,1,3.56.2,31.5,31.5,0,0,0,20.49,12A32.65,32.65,0,0,0,79.39,64.06,30.34,30.34,0,0,0,82.46,48C81.2,34.6,74.36,25.11,62,19.77a30.52,30.52,0,0,0-15.66-2.19,32,32,0,0,0-18.16,8C28,25.78,27.81,26,27.49,26.25Z"
+            transform="translate(-0.82 -1.1)" />
         </svg>
       </button>
     </div>
-    <form action="#" id="task__form" class="body__item">
+    <form action="#" id="task__form" class="task__form">
       <input type="text" id="task__input" placeholder="Add to your list...">
       <button type="submit" id="task__submit">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 56.24">
@@ -37,7 +40,7 @@
     </form>
     <ul id="task__list" class="task__list">
     </ul>
-    <button type="button" id="btn__clear-done-tasks" class="body__item">Clear done tasks</button>
+    <button type="button" id="btn__clear-done-tasks">Clear done tasks</button>
   </div>
 </body>
 
