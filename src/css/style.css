@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Andika+New+Basic:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 *,
 *::before,
 *::after {
@@ -12,7 +14,7 @@ body {
   letter-spacing: 0;
   color: #272a31;
   font-style: normal;
-  background-image: url('./background-list.svg');
+  background-image: url('../images/background-list.svg');
   background-position: center;
   background-size: cover;
 }
@@ -36,6 +38,10 @@ h1 {
   text-align: left;
 }
 
+.task__form {
+  position: relative;
+}
+
 input[type=text],
 textarea,
 button {
@@ -53,6 +59,7 @@ input[type=text] {
   padding: 0 2.5rem 0 1rem;
   line-height: 3rem;
   font-style: italic;
+  border: 1px solid #134da2;
 }
 
 textarea {
@@ -63,10 +70,8 @@ textarea {
   cursor: default;
 }
 
-input[type=text]:focus,
-textarea:focus {
-  outline: none;
-  border: none;
+input[type=text]:focus {
+  border-bottom: 1px solid #134da2;
 }
 
 button {
@@ -133,7 +138,7 @@ button:hover svg {
 
 ul {
   list-style: none;
-  padding: 0;
+  padding: 1rem 0;
   margin: 0;
 }
 
@@ -142,21 +147,13 @@ ul {
   text-align: center;
 }
 
-.body__item,
 .task__list > * {
   position: relative;
+  border-bottom: 1px solid #699dec;
 }
 
-.body__item::after,
-.task__list > *::after {
-  display: table;
-  content: '';
-  width: 100%;
-  height: 0.5px;
-  background-color: #134da2;
-  position: absolute;
-  top: 100%;
-  left: 0;
+.task__list > *:first-of-type {
+  border-top: 1px solid #699dec;
 }
 
 #task__submit,
@@ -235,6 +232,7 @@ ul {
 
 .task__header {
   background-color: #134da2;
+  border: 1px solid #134da2;
   color: #fff;
   display: flex;
   justify-content: flex-start;

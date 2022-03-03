@@ -1,4 +1,6 @@
-import './style.css';
+import '../css/style.css';
+import '../images/favicon.ico';
+import '../images/tdl-screenshot-1200x627.png';
 import * as LS from './localStorage.js';
 import * as CRUD from './crud.js';
 
