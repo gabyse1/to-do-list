@@ -46,6 +46,9 @@ const sortTasks = () => {
   elDom.forEach((ele, index) => {
     taskIds.push(ele.getAttribute('data-taskid'));
     ele.setAttribute('data-taskid', index + 1);
+    ele.querySelector('.btn__task-checklist').setAttribute('data-taskid', index + 1);
+    ele.querySelector('.txt__task-description').setAttribute('data-taskid', index + 1);
+    ele.querySelector('.btn__task-remove').setAttribute('data-taskid', index + 1);
   });
   CRUD.updateOrderTask(manageToDoListArray(), taskIds);
 };
@@ -110,11 +113,9 @@ const renderTaskList = () => {
 
     const listItemView = document.createElement('div');
     listItemView.classList.add('list-item-view');
-    listItemView.setAttribute('for', `txt__task-${task.id}`);
     const taskDescription = document.createElement('textarea');
     taskDescription.classList.add('txt__task-description');
     taskDescription.setAttribute('data-taskid', task.id);
-    taskDescription.setAttribute('id', `txt__task-${task.id}`);
     taskDescription.setAttribute('spellcheck', false);
     taskDescription.textContent = `${task.description}`;
     taskDescription.addEventListener('input', () => {
@@ -147,7 +148,6 @@ const renderTaskList = () => {
 
     const moveBtn = document.createElement('button');
     moveBtn.classList.add('btn__task-dragdrop');
-    moveBtn.setAttribute('data-taskid', task.id);
     moveBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.43 98">
               <path
                 d="M48.85,99l-1.75-.41a12.23,12.23,0,1,1,4.67.21,3.81,3.81,0,0,0-.62.2Zm0-98a4,4,0,0,1-.62.2,12.19,12.19,0,1,0,4.67.21L51.15,1ZM50,37.79A12.21,12.21,0,1,0,62.21,50,12.26,12.26,0,0,0,50,37.79Z"
